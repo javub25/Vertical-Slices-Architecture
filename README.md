@@ -41,7 +41,7 @@ export interface Product {
 
 ### 📂 constants
 
-We want to specify 4 Product Categories allowed in our application. 
+We want to specify 4 Product Categories allowed in our application.   
 Only them.    
 constants folder holds those categories.
 
