@@ -35,19 +35,22 @@ export interface Product {
   id: ProductId;     
   name: string;
   description: string;
-  price: number;       
+  price: number;   
 }
 ```
 
 ### 📂 constants
 
-We want to specify 4 Product Categories allowed in our application.   
-Only them.    
-constants folder holds those categories.
+We want to specify price product configuration allowed in our application.   
+constants folder holds it in one place.
 
 ```ts
 
-export const PRODUCT_CATEGORIES = ['Electronics', 'Food', 'Clothing', 'Services'];
+export const PRODUCT_PRICE = {
+  MIN_PRICE: 0,
+  ERROR_CODE: 'INVALID_PRICE',
+  ERROR_MESSAGE: 'Product price must be zero or greater',
+} as const;
 ```
 
 
@@ -55,10 +58,24 @@ export const PRODUCT_CATEGORIES = ['Electronics', 'Food', 'Clothing', 'Services'
 
 Contains actions to validate how a Product should be.
 
-Example, make sure a product belongs to an **authorized** category.
+Example, ensure a product has a valid price.
 
 ```ts
-export const isCategoryValid = (product: Product): boolean => {
-  return PRODUCT_CATEGORIES.includes(product.category);
+export const isPriceValid = (price: number): boolean => {
+  return price >= PRODUCT_PRICE.MIN_PRICE;
+}
+
+export const ensurePriceIsValid = (product: Product): ValidationResult => {
+  const isValid = isPriceValid(product.price);
+
+   if(isValid)
+   {
+     return { isValid: true, errors: [] };
+   }
+
+   return {
+      isValid: false,
+      errors: [PRODUCT_PRICE]
+  }
 };
-```        
+```       
