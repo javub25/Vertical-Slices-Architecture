@@ -19,6 +19,9 @@ src/
            |  └── Product.constants.ts
            ├── rules/
               └── Product.rules.ts
+          ├── presentation/
+               ├── ui
+                   └── Product.ui.tsx   
 ```
 Architecture with products feature.  
 
@@ -78,4 +81,48 @@ export const ensurePriceIsValid = (product: Product): ValidationResult => {
       errors: [PRODUCT_PRICE]
   }
 };
-```       
+```
+
+
+
+ ## 📗 📂 Presentation
+
+ Only knows **what to render**.
+
+ ✖️ No interfaces, no business logic. 
+ 
+ ✅ Statements to define what to show in the UI.  
+
+ Nothing more
+
+```ts
+export default function UserDashboardPage() {
+  const { metrics, isLoading, error } = useDashboardData(userId);
+
+  if (isLoading)
+     return <DashboardSkeleton />;
+  if (error)
+     return <ErrorBanner error={error} />;
+
+  return (
+    <PageLayout title="Dashboard">
+      <MetricGrid metrics={metrics} />
+    </PageLayout>
+  );
+}
+```
+
+### 📂 ui
+
+Views only used for UserDashboardPage view.
+
+```ts
+features/dashboard/
+ └── presentation/
+      ├── UserDashboardPage.tsx 
+      └── ui/                   
+           ├── MetricCard.tsx
+           ├── DashboardHeader.tsx
+```
+ 
+
