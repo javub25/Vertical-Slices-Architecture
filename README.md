@@ -85,15 +85,13 @@ export const ensurePriceIsValid = (product: Product): ValidationResult => {
 
 
 
- ## 📗 📂 Presentation
+ ## 📂 🖥️  Presentation
 
- Only knows **what to render**.
-
- ✖️ No interfaces, no business logic. 
+ Only knows **what to show in the UI**.
  
- ✅ Statements to define what to show in the UI.  
+ ✅ Statements to define what to show in the UI.   
+ ✅ Components, hooks, routing, state.  
 
- Nothing more
 
 ```ts
 export default function UserDashboardPage() {
@@ -123,6 +121,17 @@ features/dashboard/
       └── ui/                   
            ├── MetricCard.tsx
            ├── DashboardHeader.tsx
+      └── hooks/                   
+           ├── useDashboardData.ts
 ```
- 
+
+
+ ### 📜 Rules
+- **Presentation**: If it needs to **display data or capture user input** **(UI, framework-hooks, DOM events)**.
+- **Infraestructure**: If it **talks to anything outside** the app **(databases, APIs, LocalStorage)**.
+- **Domain**: If it defines **what the data is and how business works** **(Shapes, math, logic)**.
+- **Application**: If it coordinates the steps of a specific task.
+
+<img width="700" height="800" alt="architecture" src="https://github.com/user-attachments/assets/f204fee4-f94c-4f31-aab4-d45425ff05c8" />
+
 
